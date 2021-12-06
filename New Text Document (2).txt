@@ -1,4 +1,4 @@
-
+syntax on
 "Set register"
 set clipboard=unnamedplus
 
