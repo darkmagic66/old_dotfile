@@ -1,55 +1,59 @@
 syntax on
-"Set register"
-set clipboard=unnamedplus
 
-"Show Number and Ralativenumber"
+set clipboard=unnamedplus
+set noswapfile
+
 set number
 set relativenumber 
-
-"Show line and column number of the cursor position"
 set ruler 
+set showcmd
+set wildmenu
 
-"Set search"
+set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
 set hls
 set incsearch
 set ignorecase
 
-"Set indent"
 set autoindent  
 set smartindent 
 set tabstop=4
 set shiftwidth=4 
-
-"Show incomplete command"
-set showcmd
-
-"Show list of command when tab"
-set wildmenu
-
-"z + enter"
 set scrolloff=5
 
-"Disable swapfile"
-set noswapfile
 
 "remap key"
 let mapleader = "'"
-"map <C-n> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 nmap gf ggVGy
 inoremap jk <ESC>
-set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
 
-call plug#begin('~/.vim/plugged')
+noremap <F8> <ESC> :w <CR> :!g++  -std=c++17 -Wall -O2 -o %< % <CR>
+noremap <F9> <ESC> :!./%:r <CR>
 
-Plug 'gruvbox-community/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'jiangmiao/auto-pairs'
+"Vundle
 
-call plug#end()
+set nocompatible              
+filetype off                  
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+"Start Here
+Plugin 'gruvbox-community/gruvbox'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-airline/vim-airline'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'ycm-core/YouCompleteMe'
+call vundle#end()            
+filetype plugin indent on   
 
 let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 
 let g:airline_powerline_fonts = 1
-noremap <F9> <ESC> :w <CR> :!g++  -std=c++17 -Wall -O2 -o %< % <CR>
