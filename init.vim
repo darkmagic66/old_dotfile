@@ -29,8 +29,8 @@ map <C-n> :NERDTreeToggle<CR>
 nmap gf ggVGy
 inoremap jk <ESC>
 
-noremap <F8> <ESC> :w <CR> :!g++  -std=c++17 -Wall -O2 -o %< % <CR>
-noremap <F9> <ESC> :!./%:r <CR>
+noremap <F9> <ESC> :w <CR> :!g++  -std=c++17 -Wall -O2 -o %< % <CR>
+"noremap <F10> <ESC> :!./%:r <CR>
 
 "Vundle
 
@@ -57,3 +57,12 @@ let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 
 let g:airline_powerline_fonts = 1
+
+"Preview
+set completeopt-=preview
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+"Error
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 1
