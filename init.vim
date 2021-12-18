@@ -24,10 +24,11 @@ set scrolloff=5
 
 
 "remap key"
-let mapleader = "'"
+let mapleader = " "
 map <C-n> :NERDTreeToggle<CR>
 nmap gf ggVGy
 inoremap jk <ESC>
+noremap  <leader>/ :nohls <CR> 
 
 noremap <F9> <ESC> :w <CR> :!g++  -std=c++17 -Wall -O2 -o %< % <CR>
 "noremap <F10> <ESC> :!./%:r <CR>
