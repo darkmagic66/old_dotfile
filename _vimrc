@@ -1,85 +1,102 @@
-"plugin"
 
-execute pathogen#infect()
-filetype plugin indent on
 
-"Set GUI"
+"general config
 syntax on
-set background=light
-colorscheme solarized8
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep =''
-let g:airline#extensions#tabline#left_alt_sep =''
-let g:airline#extensions#tabline#right_sep=''
-let g:airline#extensions#tabline#right_alt_sep=''
-let g:airline_powerline_fonts=1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_theme = 'solarized'
-set laststatus=2
-if has("gui_running")
-	set guioptions -=m
-	set guioptions -=T
-  	if has("gui_gtk2")
-		set guifont=utf-8:h11
-  	elseif has("gui_macvim")
-    	set guifont=Menlo\ Regular:h14
-  	elseif has("gui_win32")
-    	set guifont=Consolas:h11:cANSI
-  	endif
-endif
-
-"Fix backspace"
-:set backspace=indent,eol,start
-
-"Set register"
 set clipboard=unnamed
+set showcmd
+set wildmenu
+set noswapfile
 
-"Show Number and Ralativenumber"
-set number
+"line and number
+set number 
 set relativenumber 
 
-"Show line and column number of the cursor position"
-set ruler 
-
-"Set search"
+"serach
 set hls
 set incsearch
 set ignorecase
 
-"Set indent"
-set autoindent  
-set smartindent 
-set tabstop=4
-set shiftwidth=4 
+"indent
+set autoindent
+set smartindent
+set ts=4
+set sw=4
 
-"Show incomplete command"
-set showcmd
+cd C:\Users\empty\Code
 
-"Show list of command when tab"
-set wildmenu
-
-"z + enter"
-set scrolloff=5
-
-"Disable swapfile"
-set noswapfile
-
-"remap key"
+"remap
 let mapleader = "'"
-map <C-n> :NERDTreeToggle<CR>
-nmap gf ggVGy
 inoremap jk <ESC>
+nmap gf ggVGy
+"inoremap { {}<Left>
+"inoremap {<CR> {<CR>}<Esc>O
+"inoremap {{ {
+"inoremap {} {}
 
-"Path"
-cd E:\Code\Code C++\Vim C++
 
-"Compile and Run C++"
+"compile 
+autocmd filetype cpp nnoremap <F9> :w <bar> !g++ -std=c++14 % -o %:r -Wl,--stack,268435456<CR>
+autocmd filetype cpp nnoremap <F10> :!%:r<CR>
+autocmd filetype cpp nnoremap <C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
 
-autocmd filetype c nnoremap <F9> :w <bar> !gcc -std=c11 % -o %:r -Wl,--stack,268435456<CR>
-autocmd filetype c nnoremap <F10> :!%:r<CR>
-autocmd filetype cpp nnoremap <F11> :w <bar> !g++ -std=c++11 -O2 -Wall % -o %:r && %:r.exe <CR>
+"font 
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ 12
+  elseif has("gui_macvim")
+    set guifont=Menlo\ Regular:h14
+  elseif has("gui_win32")
+    set guifont=Consolas:h11:cANSI
+  endif
+endif
 
-"Compile and Run C
-"autocmd filetype c nnoremap <F9> :w <bar> !gcc -std=c11 % -o %:r -Wl,--stack,268435456<CR>
-"autocmd filetype c nnoremap <F10> :!%:r<CR>
+augroup numbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave * set rnu
+    autocmd BufLeave,FocusLost,InsertEnter * set nornu
+augroup END
+
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg1 = substitute(arg1, '!', '\!', 'g')
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg2 = substitute(arg2, '!', '\!', 'g')
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let arg3 = substitute(arg3, '!', '\!', 'g')
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      if empty(&shellxquote)
+        let l:shxq_sav = ''
+        set shellxquote&
+      endif
+      let cmd = '"' . $VIMRUNTIME . '\diff"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  let cmd = substitute(cmd, '!', '\!', 'g')
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
+  if exists('l:shxq_sav')
+    let &shellxquote=l:shxq_sav
+  endif
+endfunction
+
+"Plugin Starhere
+call plug#begin()
+
+Plug 'junegunn/vim-easy-align'
+
+Plug 'tpope/vim-fugitive'
+Plug 'jiangmiao/auto-pairs'
+
+" Initialize plugin system
+call plug#end()
