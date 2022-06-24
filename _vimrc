@@ -1,15 +1,22 @@
-
-
 "general config
 syntax on
+set encoding=utf-8
 set clipboard=unnamed
+set gfn=Fixedsys:h10 "guifont
+
+"UI
 set showcmd
 set wildmenu
+set scrolloff=10
+
+"disable annoying thing
 set noswapfile
+set noundofile
 
 "line and number
 set number 
-set relativenumber 
+set relativenumber
+set ruler
 
 "serach
 set hls
@@ -22,17 +29,25 @@ set smartindent
 set ts=4
 set sw=4
 
+"python
+set pythonthreehome=C:\Users\empty\AppData\Local\Programs\Python\Python37
+set pythonthreedll=C:\Users\empty\AppData\Local\Programs\Python\Python37\pthon37.dll
 cd C:\Users\empty\Code
 
 "remap
-let mapleader = "'"
+let mapleader = ";"
 inoremap jk <ESC>
 nmap gf ggVGy
+
 "inoremap { {}<Left>
 "inoremap {<CR> {<CR>}<Esc>O
 "inoremap {{ {
 "inoremap {} {}
 
+
+"plugin remap
+map <C-n> :NERDTreeToggle<CR>
+noremap <leader>ci :NERDComInvertComment
 
 "compile 
 autocmd filetype cpp nnoremap <F9> :w <bar> !g++ -std=c++14 % -o %:r -Wl,--stack,268435456<CR>
@@ -90,13 +105,14 @@ function MyDiff()
   endif
 endfunction
 
-"Plugin Starhere
+"Plugin Start here
 call plug#begin()
 
 Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-fugitive'			
+Plug 'airblade/vim-gitgutter'		
+Plug 'jiangmiao/auto-pairs' 		
+Plug 'scrooloose/nerdtree'			
+Plug 'scrooloose/nerdcommenter'		
 
-Plug 'tpope/vim-fugitive'
-Plug 'jiangmiao/auto-pairs'
-
-" Initialize plugin system
 call plug#end()
