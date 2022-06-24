@@ -12,6 +12,7 @@ set scrolloff=10
 "disable annoying thing
 set noswapfile
 set noundofile
+set backspace=indent,eol,start
 
 "line and number
 set number 
