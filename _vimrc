@@ -33,6 +33,8 @@ set sw=4
 "python
 set pythonthreehome=C:\Users\empty\AppData\Local\Programs\Python\Python37
 set pythonthreedll=C:\Users\empty\AppData\Local\Programs\Python\Python37\pthon37.dll
+
+colorscheme nord
 cd C:\Users\empty\Code
 
 "remap
@@ -65,6 +67,21 @@ if has("gui_running")
     set guifont=Consolas:h11:cANSI
   endif
 endif
+
+"Plugin Start here
+call plug#begin()
+
+Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-fugitive'			
+Plug 'airblade/vim-gitgutter'		
+Plug 'jiangmiao/auto-pairs' 		
+Plug 'scrooloose/nerdtree'			
+Plug 'scrooloose/nerdcommenter'		
+Plug 'arcticicestudio/nord-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+call plug#end()
 
 augroup numbertoggle
     autocmd!
@@ -106,14 +123,3 @@ function MyDiff()
   endif
 endfunction
 
-"Plugin Start here
-call plug#begin()
-
-Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-fugitive'			
-Plug 'airblade/vim-gitgutter'		
-Plug 'jiangmiao/auto-pairs' 		
-Plug 'scrooloose/nerdtree'			
-Plug 'scrooloose/nerdcommenter'		
-
-call plug#end()
