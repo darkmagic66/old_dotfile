@@ -72,16 +72,46 @@ endif
 call plug#begin()
 
 Plug 'junegunn/vim-easy-align'
+
+"Git
 Plug 'tpope/vim-fugitive'			
 Plug 'airblade/vim-gitgutter'		
+
+"Utility
 Plug 'jiangmiao/auto-pairs' 		
+Plug 'tpope/vim-surround'
+Plug 'alvan/vim-closetag'
+
+"UI
 Plug 'scrooloose/nerdtree'			
 Plug 'scrooloose/nerdcommenter'		
+
+"Theme
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+
 call plug#end()
+
+
+"Plug Confic
+
+"close tag
+
+"let g:closetag_shortcut = '>'
+"let g:closetag_close_shortcut = '<leader>>'
+"let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+"let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+"let g:closetag_filetypes = 'html,xhtml,phtml'
+"let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+"let g:closetag_emptyTags_caseSensitive = 1
+"let g:closetag_regions = {
+    "\ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    "\ 'javascript.jsx': 'jsxRegion',
+    "\ 'typescriptreact': 'jsxRegion,tsxRegion',
+    "\ 'javascriptreact': 'jsxRegion',
+    "\ }
 
 augroup numbertoggle
     autocmd!
