@@ -34,7 +34,10 @@ set sw=4
 set pythonthreehome=C:\Users\empty\AppData\Local\Programs\Python\Python37
 set pythonthreedll=C:\Users\empty\AppData\Local\Programs\Python\Python37\pthon37.dll
 
-colorscheme nord
+"colorscheme nord
+"set background=light
+"colorscheme solarized
+colorscheme codedark
 cd C:\Users\empty\Code
 
 "remap
@@ -49,8 +52,18 @@ nmap gf ggVGy
 
 
 "plugin remap
+
+" auto complete
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" nerd pulgin
 map <C-n> :NERDTreeToggle<CR>
 noremap <leader>ci :NERDComInvertComment
+
+" fzf serach + buffer
+nnoremap <C-P>  :Files<CR>
+nnoremap <C-B>  :Buffers<CR>
 
 "compile 
 autocmd filetype cpp nnoremap <F9> :w <bar> !g++ -std=c++14 % -o %:r -Wl,--stack,268435456<CR>
@@ -86,12 +99,18 @@ Plug 'alvan/vim-closetag'
 Plug 'scrooloose/nerdtree'			
 Plug 'scrooloose/nerdcommenter'		
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 "Theme
-Plug 'arcticicestudio/nord-vim'
+"Plug 'arcticicestudio/nord-vim'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'tomasiser/vim-code-dark'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-
+"coc
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 
