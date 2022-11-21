@@ -31,8 +31,8 @@ set ts=4
 set sw=4
 
 "python
-set pythonthreehome=C:\Users\empty\AppData\Local\Programs\Python\Python37
-set pythonthreedll=C:\Users\empty\AppData\Local\Programs\Python\Python37\pthon37.dll
+set pythonthreehome=C:\Users\empty\AppData\Local\Programs\Python\Python311
+set pythonthreedll=C:\Users\empty\AppData\Local\Programs\Python\Python311\python311.dll
 
 "colorscheme nord
 "set background=light
@@ -67,7 +67,8 @@ nnoremap <C-B>  :Buffers<CR>
 
 "compile 
 autocmd filetype cpp nnoremap <F9> :w <bar> !g++ -std=c++14 % -o %:r -Wl,--stack,268435456<CR>
-autocmd filetype cpp nnoremap <F10> :!%:r<CR>
+"autocmd filetype cpp nnoremap <F10> :!%:r<CR>
+autocmd filetype cpp nnoremap <F10> :!./%:r<CR>
 autocmd filetype cpp nnoremap <C-C> :s/^\(\s*\)/\1\/\/<CR> :s/^\(\s*\)\/\/\/\//\1<CR> $
 
 "font 
@@ -111,64 +112,25 @@ Plug 'vim-airline/vim-airline-themes'
 
 "coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-call plug#end()
 
+"Snippet
+"Plug 'Mathijs-Bakker/vim-unity-snippets'
+Plug 'ycm-core/youcompleteme'
+
+call plug#end()
 
 "Plug Confic
 
-"close tag
 
-"let g:closetag_shortcut = '>'
-"let g:closetag_close_shortcut = '<leader>>'
-"let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
-"let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
-"let g:closetag_filetypes = 'html,xhtml,phtml'
-"let g:closetag_xhtml_filetypes = 'xhtml,jsx'
-"let g:closetag_emptyTags_caseSensitive = 1
-"let g:closetag_regions = {
-    "\ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    "\ 'javascript.jsx': 'jsxRegion',
-    "\ 'typescriptreact': 'jsxRegion,tsxRegion',
-    "\ 'javascriptreact': 'jsxRegion',
-    "\ }
+"YCM 
 
-augroup numbertoggle
-    autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * set rnu
-    autocmd BufLeave,FocusLost,InsertEnter * set nornu
-augroup END
+"Preview
+set completeopt-=preview
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+"Error
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 1
 
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg1 = substitute(arg1, '!', '\!', 'g')
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg2 = substitute(arg2, '!', '\!', 'g')
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let arg3 = substitute(arg3, '!', '\!', 'g')
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      if empty(&shellxquote)
-        let l:shxq_sav = ''
-        set shellxquote&
-      endif
-      let cmd = '"' . $VIMRUNTIME . '\diff"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  let cmd = substitute(cmd, '!', '\!', 'g')
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
-  if exists('l:shxq_sav')
-    let &shellxquote=l:shxq_sav
-  endif
-endfunction
 
