@@ -1,0 +1,47 @@
+{
+    "git.autofetch": false,
+    "python.defaultInterpreterPath": "C:\\Users\\empty\\AppData\\Local\\Programs\\Python\\Python37\\python.exe",
+    "files.autoSave": "off",
+    "editor.wordWrap": "on",
+
+    // vim 
+    "vim.hlsearch": true,
+    "vim.easymotion": true,
+    "vim.useSystemClipboard": true,
+    "vim.leader": ";",
+    "vim.insertModeKeyBindings": [
+        {  
+            "before": ["j","k"],
+            "after": ["<esc>"] 
+        }
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+            "before":["<leader>","s"],
+            "after":[":nohls"]
+        },
+        {
+            "before":["g","f"],
+            "after":["g","g","V","G","y"]
+        },
+        {
+
+            "before":["z","z"],
+            "after":[":wq"]
+        }
+    ],
+
+    // ------------------------------------------------ //
+
+    "workbench.colorTheme": "Gruvbox Dark Hard",
+    "telemetry.telemetryLevel": "off",
+    "haskell.manageHLS": "GHCup",
+    "jupyter.interactiveWindow.codeLens.enableGotoCell": false,
+
+    // Go
+    "[go]": {
+        "editor.insertSpaces": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "golang.go"
+},
+}    
